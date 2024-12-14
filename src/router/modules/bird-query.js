@@ -2,10 +2,10 @@
 
 import Layout from '@/layout'
 
-const birdRouter = {
-  path: '/bird',
-  component: Layout,
-  alwaysShow: true,
+const birdQueryRouter = {
+  path: 'query',
+  component: () => import('@/views/birds/query'),
+  alawysShow: true,
   name: 'Bird',
   meta: {
     title: '鸟类明细',
@@ -13,14 +13,14 @@ const birdRouter = {
   },
   children: [
     {
-      alwaysShow: true,
+      alawysShow: true,
       path: 'query',
       component: () => import('@/views/birds/query'),
       name: 'query',
       meta: { title: '鸟类识别', noCache: true }
     },
     {
-      alwaysShow: true,
+      alawysShow: true,
       path: 'list',
       component: () => import('@/views/birds/list'),
       name: 'list',
@@ -29,4 +29,4 @@ const birdRouter = {
   ]
 }
 
-export default birdRouter
+export default birdQueryRouter
