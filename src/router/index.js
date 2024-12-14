@@ -75,7 +75,7 @@ export const asyncRoutes = [
         component: () => import('@/views/birds/list'),
         name: 'BirdList',
         meta: {
-          title: '鸟类查询',
+          title: '鸟类百科',
           icon: 'search'
         }
       }
