@@ -7,12 +7,18 @@
       element-loading-background="rgba(255, 255, 255, 0.8)"
       class="loading-container"
     >
-
       <h1 class="bird-title">鸟类百科</h1>
 
-      <div style="display: flex; align-items: center;">
-        <el-input v-model="queryForm.keyWords" placeholder="请输入鸟类名称" style="display: inline-block; width: 200px; margin-right: 10px;" />
-        <el-button type="primary" @click="queryList">查询</el-button>
+      <div class="search-container">
+        <el-input
+          v-model="queryForm.keyWords"
+          placeholder="请输入鸟类名称"
+          class="search-input"
+          prefix-icon="el-icon-search"
+        />
+        <el-button type="primary" class="search-button" @click="queryList">
+          <i class="el-icon-search" /> 查询
+        </el-button>
       </div>
 
       <br> <br>
@@ -21,6 +27,8 @@
         :data="birdList"
         style="width: 100%"
         border
+        class="bird-table"
+        :header-cell-style="{ background: '#f5f7fa', color: '#606266' }"
       >
         <el-table-column
           type="index"
@@ -54,6 +62,8 @@
               :preview-src-list="[scope.row.image]"
               fit="cover"
               style="width: 100px; height: 100px"
+              :initial-index="0"
+              class="bird-image"
             >
               <div slot="error">
                 <i class="el-icon-picture-outline" />
@@ -105,7 +115,7 @@ export default {
         image: '',
         area: '栖息地',
         information: '特点',
-        sname: '鸟类名称',
+        sname: '鸟���名称',
         species: '鸟类名称'
       }]
     }
@@ -164,46 +174,93 @@ export default {
 
 <style scoped>
 .bird-encyclopedia {
-  padding: 20px;
+  padding: 30px;
+  background-color: #f0f2f5;
+  min-height: calc(100vh - 60px);
 }
 
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 28px;
-}
-
-.bird-image {
-  width: 100px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 5px;
-}
-.bird-title {
-text-align: center;
-font-size: 36px;
-color: #409EFF;
-margin: 20px 0;
-text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-font-weight: bold;
-letter-spacing: 2px;
-}
-
-/* 添加自定义加载样式 */
 .loading-container {
   min-height: 200px;
+  background-color: white;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.1);
 }
 
-/* 通过深度选择器修改 Element UI 的加载文字样式 */
+.bird-title {
+  text-align: center;
+  font-size: 36px;
+  color: #409EFF;
+  margin: 20px 0 30px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.search-input {
+  width: 300px;
+  margin-right: 16px;
+}
+
+.search-button {
+  padding: 12px 24px;
+}
+
+.bird-table {
+  margin: 20px 0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.pagination-container {
+  margin-top: 20px;
+  text-align: center;
+  padding: 16px 0;
+}
+
 ::v-deep .el-loading-text {
   font-size: 30px;
   font-weight: bold;
   margin-top: 10px;
 }
 
-/* 添加分页样式 */
-.pagination-container {
-  margin-top: 20px;
-  text-align: center;
+::v-deep .el-image {
+  border-radius: 4px;
+  transition: transform 0.3s;
+}
+
+::v-deep .el-image:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+::v-deep .el-pagination.is-background .el-pager li:not(.disabled).active {
+  background-color: #409EFF;
+  color: white;
+}
+
+::v-deep .el-pagination.is-background .el-pager li:not(.disabled):hover {
+  color: #409EFF;
+}
+
+.bird-image {
+  background-color: #f5f7fa;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+::v-deep .el-image-viewer__wrapper {
+  backdrop-filter: blur(10px);
+}
+
+::v-deep .el-image-viewer__img {
+  background-color: transparent;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 </style>
